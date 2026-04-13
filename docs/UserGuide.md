@@ -159,7 +159,7 @@ The data file `[JAR file location]/data/talently.json` is in JSON format. While 
 
 * **Input normalization:** Names have extra whitespace collapsed (e.g., <code>John&nbsp;&nbsp;&nbsp;Doe</code> becomes `John Doe`). Emails are automatically lowercased (e.g., `John@Gmail.COM` becomes `john@gmail.com`). Addresses have leading and trailing whitespace stripped (e.g., `  123 Main St  ` is accepted as `123 Main St`). Phone numbers are compared by their digits only — the `+` prefix, spaces, hyphens, and parentheses are stripped before comparing, so `+65-9123-4567`, `+6591234567`, and `6591234567` are all treated as the same number for duplicate detection.
 * **Providing duplicate prefixes** (e.g., `n/Alice n/Bob`) in a single command is not allowed and will be rejected with an error.
-* **Display resets:** After any command that adds, edits, removes, or otherwise changes candidate data (`add`, `edit`, `remove`, `tag`, `addnote`, `editnote`, `deletenote`, `addreject`, `editreject`, `deletereject`), the candidate list returns to the default alphabetical order and any active filter or search is cleared.
+* **Display resets:** After any command that adds, edits, removes, or otherwise changes candidate data (`add`, `edit`, `remove`, `clear`, `tag`, `tagpool`, `addnote`, `editnote`, `deletenote`, `addreject`, `editreject`, `deletereject`), the candidate list returns to the default alphabetical order and any active filter or search is cleared.
 
 </div>
 
