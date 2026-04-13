@@ -169,14 +169,14 @@ The data file `[JAR file location]/data/talently.json` is in JSON format. While 
 
 | Field | Prefix | Rules |
 |---|---|---|
-| NAME | `n/` | Letters (a-z, A-Z), digits (0-9), spaces, hyphens `-`, apostrophe `'`, periods `.`, slashes `/`, commas `,`, `@` symbols, backticks (`` ` ``), and parentheses `()`. Must start with a letter. 1–100 characters. Strips leading/trailing whitespace and normalizes internal spaces. **Do not include the sequences ` n/`, ` p/`, ` e/`, ` a/`, or ` pr/` (space + prefix) inside the name value** — the parser will treat them as new field prefixes, splitting your input incorrectly. |
-| PHONE | `p/` | Optional `+` prefix, then digits with optional spaces, hyphens `-`, or parentheses `()` as separators. Must start with a `+` or digit, and must end with a digit. Must contain 3–15 digits (separators excluded). Strips leading/trailing whitespace. |
-| EMAIL | `e/` | `local@domain` format. Max 254 characters. Automatically lowercased. The local part may contain letters, digits, and `+ _ . -`; it must **start and end with a letter or digit** (not a special character), and **consecutive special characters are not allowed** (e.g. `test..email@example.com` is invalid). The domain must have at least one `.` and a TLD of at least two letters. Strips leading/trailing whitespace. |
-| ADDRESS | `a/` | Any non-empty printable ASCII text (no accented letters, emojis, or non-ASCII input). Max 200 characters. Strips leading/trailing whitespace. **Do not include the sequences ` n/`, ` p/`, ` e/`, ` a/`, or ` pr/` (space + prefix) inside the address value** — the parser will treat them as new field prefixes. |
-| TAG | `at/` / `dt/` | Must start with a letter or number, followed by letters, numbers, or `. + - _ ( ) @ # ! ? '`. No spaces. 1–30 characters. Case-insensitive. Strips leading/trailing whitespace. |
+| NAME | `n/` | Letters (a-z, A-Z), digits (0-9), spaces, hyphens, apostrophes, periods, slashes, commas, `@` symbols, backticks, and parentheses. Must start with a letter. 1–100 characters. Strips leading/trailing whitespace and normalizes internal spaces. |
+| PHONE | `p/` | Optional `+` prefix, then digits with optional spaces, hyphens, or parentheses as separators. Must start with a `+` or digit, and must end with a digit. Must contain 3–15 digits (separators excluded). Strips leading/trailing whitespace. |
+| EMAIL | `e/` | Standard email format. Max 254 characters. Automatically lowercased. The local part must start and end with a letter or digit; no consecutive special characters. The domain must have at least one period and a TLD of at least two letters. Strips leading/trailing whitespace. |
+| ADDRESS | `a/` | Any non-empty printable ASCII text. Max 200 characters. Strips leading/trailing whitespace. |
+| TAG | `at/` / `dt/` | Must start with a letter or number. No spaces. 1–30 characters. Case-insensitive. Strips leading/trailing whitespace. |
 | PRIORITY | `pr/` | Case-insensitive `yes` or `no`. Defaults to `no` if omitted during creation. Strips leading/trailing whitespace. |
-| REJECTION REASON | *(none — positional)* | Letters, numbers, spaces, and the symbols `. , - ' / : ; ! ? ( ) & " # + % @ *`. Must not be blank. Max 200 characters. Strips leading/trailing whitespace. The reason is entered directly after the index (and rejection index for `editreject`) with no prefix — e.g. `addreject 1 Failed technical interview`. |
-| NOTE | `c/`, `h/` | Heading (`h/`) is optional (defaults to `General Note`). Content (`c/`) is required. Printable ASCII only. Converts newlines to spaces and strips leading/trailing whitespace. **Do not include the sequences ` c/` or ` h/` (space + prefix) inside note content or headings** — the parser will treat them as new field delimiters, splitting your input incorrectly. |
+| REJECTION REASON | *(positional)* | Letters, numbers, spaces, and common punctuation. Must not be blank. Max 200 characters. Strips leading/trailing whitespace. Entered directly after the index with no prefix. |
+| NOTE | `c/`, `h/` | Heading (`h/`) is optional, defaults to `General Note`. Content (`c/`) is required. Printable ASCII only. Converts newlines to spaces and strips leading/trailing whitespace. |
 
 All text fields accept **printable ASCII characters only** — non-ASCII input (accented letters, emojis, CJK characters) is rejected. See [Environment assumptions](#environment-assumptions) for details.
 
@@ -211,10 +211,10 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [pr/PRIORITY]`
 
 | Parameter | Prefix | Required | Rules |
 |---|---|---|---|
-| NAME | `n/` | Yes | Letters (a-z, A-Z), digits (0-9), spaces, hyphens `-`, apostrophe `'`, periods `.`, slashes `/`, commas `,`, `@` symbols, backticks (`` ` ``), and parentheses `()`. Must start with a letter. Strips leading/trailing whitespace and normalizes internal spaces. 1–100 characters. **Avoid the sequences ` n/`, ` p/`, ` e/`, ` a/`, ` pr/` (space + prefix) inside the value** — they are treated as new prefixes. |
-| PHONE | `p/` | Yes | Optional `+` prefix, then digits with optional spaces, hyphens `-`, or parentheses `()` as separators. Must start with a `+` or digit, and must end with a digit. Must contain 3–15 digits (separators excluded). Strips leading/trailing whitespace. |
-| EMAIL | `e/` | Yes | `local@domain` format. Max 254 characters. Automatically lowercased. The local part may contain letters, digits, and `+ _ . -`; must start and end with a letter or digit; no consecutive special characters (e.g. `a..b@x.com` is invalid). Strips leading/trailing whitespace. |
-| ADDRESS | `a/` | Yes | Any non-empty printable ASCII text (no accented letters, emojis, or non-ASCII input). Max 200 characters. Strips leading/trailing whitespace. **Avoid the sequences ` n/`, ` p/`, ` e/`, ` a/`, ` pr/` (space + prefix) inside the value** — they are treated as new prefixes. |
+| NAME | `n/` | Yes | Letters, digits, spaces, hyphens, apostrophes, periods, slashes, commas, `@` symbols, backticks, and parentheses. Must start with a letter. 1–100 characters. Strips leading/trailing whitespace and normalizes internal spaces. |
+| PHONE | `p/` | Yes | Optional `+` prefix, then digits with optional spaces, hyphens, or parentheses as separators. Must start with a `+` or digit, and must end with a digit. Must contain 3–15 digits (separators excluded). Strips leading/trailing whitespace. |
+| EMAIL | `e/` | Yes | Standard email format. Max 254 characters. Automatically lowercased. Local part must start and end with a letter or digit; no consecutive special characters. Strips leading/trailing whitespace. |
+| ADDRESS | `a/` | Yes | Any non-empty printable ASCII text. Max 200 characters. Strips leading/trailing whitespace. |
 | PRIORITY | `pr/` | No | Case-insensitive `yes` or `no`. Default: `no`. Strips leading/trailing whitespace. |
 
 <div markdown="span" class="alert alert-info">
