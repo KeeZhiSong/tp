@@ -209,13 +209,13 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [pr/PRIORITY]`
 
 **Parameters:**
 
-| Parameter | Prefix | Required | Rules                                                                                                                                                                                                                                                                                                                                                                                                                |
-|---|---|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Parameter | Prefix | Required | Rules |
+|---|---|---|---|
 | NAME | `n/` | Yes | Letters (a-z, A-Z), digits (0-9), spaces, hyphens `-`, apostrophe `'`, periods `.`, slashes `/`, commas `,`, `@` symbols, backticks (`` ` ``), and parentheses `()`. Must start with a letter. Strips leading/trailing whitespace and normalizes internal spaces. 1–100 characters. **Avoid the sequences ` n/`, ` p/`, ` e/`, ` a/`, ` pr/` (space + prefix) inside the value** — they are treated as new prefixes. |
-| PHONE | `p/` | Yes | Optional `+` prefix, then digits with optional spaces, hyphens `-`, or parentheses `()` as separators. Must start with a `+` or digit, and must end with a digit. Must contain 3–15 digits (separators excluded). Strips leading/trailing whitespace.                                                                                                                                                                |
-| EMAIL | `e/` | Yes | `local@domain` format. Max 254 characters. Automatically lowercased. The local part may contain letters, digits, and `+ _ . -`; must start and end with a letter or digit; no consecutive special characters (e.g. `a..b@x.com` is invalid). Strips leading/trailing whitespace.                                                                                                                                     |
-| ADDRESS | `a/` | Yes | Any non-empty printable ASCII text (no accented letters, emojis, or non-ASCII input). Max 200 characters. Strips leading/trailing whitespace. **Avoid the sequences ` n/`, ` p/`, ` e/`, ` a/`, ` pr/` (space + prefix) inside the value** — they are treated as new prefixes.                                                                                                                                       |
-| PRIORITY | `pr/` | No | Case-insensitive `yes` or `no`. Default: `no`. Strips leading/trailing whitespace.                                                                                                                                                                                                                                                                                                                                   |
+| PHONE | `p/` | Yes | Optional `+` prefix, then digits with optional spaces, hyphens `-`, or parentheses `()` as separators. Must start with a `+` or digit, and must end with a digit. Must contain 3–15 digits (separators excluded). Strips leading/trailing whitespace. |
+| EMAIL | `e/` | Yes | `local@domain` format. Max 254 characters. Automatically lowercased. The local part may contain letters, digits, and `+ _ . -`; must start and end with a letter or digit; no consecutive special characters (e.g. `a..b@x.com` is invalid). Strips leading/trailing whitespace. |
+| ADDRESS | `a/` | Yes | Any non-empty printable ASCII text (no accented letters, emojis, or non-ASCII input). Max 200 characters. Strips leading/trailing whitespace. **Avoid the sequences ` n/`, ` p/`, ` e/`, ` a/`, ` pr/` (space + prefix) inside the value** — they are treated as new prefixes. |
+| PRIORITY | `pr/` | No | Case-insensitive `yes` or `no`. Default: `no`. Strips leading/trailing whitespace. |
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Tags are not set at add time.** First create tags with `tagpool`, then assign them with `tag`. See [Managing the tag pool](#managing-the-tag-pool--tagpool) and [Tagging a candidate](#tagging-a-candidate--tag).
@@ -239,7 +239,7 @@ Examples:
 
 ![add.png](images/add.png)
 
-> **Expected output:** `New candidate added: John Doe | Phone: 98765432 | Email: johnd@example.com | Address: John street, block 123, #01-01`
+> **Expected output:** New candidate added: John Doe &#124; Phone: 98765432 &#124; Email: johnd@example.com &#124; Address: John street, block 123, #01-01
 
 ---
 
@@ -287,7 +287,7 @@ Examples:
 
 ![edit.png](images/edit.png)
 
-> **Expected output:** `Edited Candidate: Betsy Crower | Phone: 99272758 | Email: berniceyu@example.com | Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18`
+> **Expected output:** Edited Candidate: Betsy Crower &#124; Phone: 99272758 &#124; Email: berniceyu@example.com &#124; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18
 
 ---
 
@@ -398,7 +398,7 @@ Examples:
 * `list` then `remove 2` — Removes the 2nd candidate in the full list.
 * `find Betsy` then `remove 1` — Removes the first result from the search.
 
-> **Expected output:** `Removed Person: John Doe | Phone: 98765432 | Email: johnd@example.com | Address: John street, block 123, #01-01`
+> **Expected output:** Removed Person: John Doe &#124; Phone: 98765432 &#124; Email: johnd@example.com &#124; Address: John street, block 123, #01-01
 
 ---
 
